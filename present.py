@@ -120,7 +120,7 @@ def main(stdscr):
                 animate = -1
                 slide_nr -= 1
         else:
-            slide_nr += 1
+            pass
 
         # Dont wrap around backwards
         if slide_nr < 0:
