@@ -98,7 +98,12 @@ def main(stdscr):
             animate = -1
 
         elif char == curses.KEY_DOWN:
-            animate += 1
+            # If we are pressing down on an already fully shown slide, go to next
+            if animate == -1:
+                animate = 0
+                slide_nr += 1
+            else:
+                animate += 1
 
             # If we go past the end of the slide go the beginning of the next one without showing contents
             if animate >= slide_animation_length:
