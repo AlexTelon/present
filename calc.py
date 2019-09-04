@@ -1,18 +1,33 @@
 from curses import wrapper
 
-def main(stdscr):
-    WIDTH = 100
+def get_slides(file):
+    content = ''
+    with open(file, 'r') as f:
+        content = f.readlines()
 
-    # Clear screen
+    slides = []
+    slide = ''
+    for line in content:
+        if line.startswith('# '):
+            slides.append(slide)
+
+            # start a new slide
+            slide = line
+        else:
+            slide += line
+
+    return slides
+
+def main(stdscr):
     stdscr.clear()
 
-    for i in range(0, 11):
-        v = i-10
-        stdscr.addstr(i, int(WIDTH/2), '10 divided by {} is {}'.format(v, 2))
+    slides = get_slides('presentation.md')
+    for slide in slides:
+        stdscr.addstr(0, 0, slide)
+
         stdscr.refresh()
         stdscr.getkey()
 
-        # Clear screen
         stdscr.clear()
 
 wrapper(main)
