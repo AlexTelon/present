@@ -26,7 +26,7 @@ def get_slides(file):
 
 def print_slide(stdscr, slide, lines_to_print=-1):
     try:
-        _print_slide_without_error_check(stdscr, slide, lines_to_print=-1)
+        _print_slide_without_error_check(stdscr, slide, lines_to_print)
     except curses.error:
         stdscr.clear()
         _print_slide_without_error_check(stdscr, "Text does not fit!", lines_to_print=-1)
