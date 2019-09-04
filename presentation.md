@@ -1,3 +1,5 @@
+# git
+
 # Agenda
 
 # About me
@@ -68,8 +70,7 @@ TODO:
 # git log
 
 TODO:
-    --oneline --graph --all -5 --decoreate
-    --full-history
+    --oneline --graph --all -5
 
     git log filename
 
