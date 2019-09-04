@@ -27,17 +27,17 @@ Version control needed!
 
 # Version Control Systems
 
-* How to cordinate large groups of coders?
-* How to manage release?
-* How to find why something went wrong
+ * How to cordinate large groups of coders?
+ * How to manage release?
+ * How to find why something went wrong
 (and who did it!)
 
 # What is git?
 
-* Distributed version control
-* Entire code history on your local machine
-* Performant
-* Open-source
+ * Distributed version control
+ * Entire code history on your local machine
+ * Performant
+ * Open-source
 
 
 # Short history
@@ -48,10 +48,10 @@ To find out more: "Linus Torvalds git" on youtube
 
 # Goal of this talk
 
-* High level ideas
-* What are the benefits
-* What type of workflow git enables
-* Why you should use the command line interface
+ * High level ideas
+ * What are the benefits
+ * What type of workflow git enables
+ * Why you should use the command line interface
 
 Not too much details you can easily learn online
  - Search for git online tutorial and try some out.
@@ -59,7 +59,11 @@ Not too much details you can easily learn online
 # Introduce the demo project
 
 TODO:
- * Show the audience the sample project and its files
+* Show the audience the sample project and its files
+
+
+# Demo
+
 
 # git log
 
@@ -92,29 +96,25 @@ git add -A
 
 # git status
 
+It is your friend, use it a lot!
+
 # git rebase
 
-# git merge
-
 # git branch
+
+# git merge
 
 # git reflog
 To show that it is hard to delete stuff.
 
 # git blame?
 
-# workflow thoughts
+# Closing thoughts
 
-Do small commits
-One commit does "one thing"
-Write a useful commit message with heading and text (when needed)
-git diff to see that your commit has the right stuff
-
-
-
-# Demo
-
-
----
+ * Do small commits
+ * One commit does "one thing"
+ * Write a useful commit message with heading and text (when needed)
+ * git diff to see that your commit has the right stuff
+ * Use it for toy projects at home to get familiar with it
 
 # Questions
