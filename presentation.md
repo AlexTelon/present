@@ -64,6 +64,8 @@ git add -A
 # git reflog
 To show that it is hard to delete stuff.
 
+# git blame?
+
 # workflow thoughts
 
 Do small commits
