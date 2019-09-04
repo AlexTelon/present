@@ -25,7 +25,10 @@ def main(stdscr):
     curses.curs_set(0)
 
     slides = get_slides('presentation.md')
-    for slide in slides:
+
+    slide_nr = 1
+    while True:
+        slide = slides[slide_nr % len(slides)]
 
         for i, line in enumerate(slide.splitlines()):
             format = curses.A_NORMAL
@@ -36,10 +39,27 @@ def main(stdscr):
             stdscr.addstr(i, 0, line, format)
 
         stdscr.refresh()
-        key = stdscr.getkey()
+        # key = stdscr.getkey()
+        # if key == 'q':
+        #     break
+        # elif key == ''
 
-        if key == 'q':
-            break
+        char = stdscr.getch()
+        if char == 113: break  # q
+        elif char == curses.KEY_RIGHT: slide_nr += 1
+        elif char == curses.KEY_LEFT:  slide_nr -= 1
+        else:
+            slide_nr += 1
+
+        # elif char == curses.KEY_UP:
+        # elif char == curses.KEY_DOWN:
+
+        # Dont wrap around backwards
+        if slide_nr < 0:
+            slide_nr = 0
+
+        if slide_nr >= len(slides):
+            slide_nr = len(slides)
 
         stdscr.clear()
 
