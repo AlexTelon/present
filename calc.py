@@ -39,20 +39,15 @@ def main(stdscr):
             stdscr.addstr(i, 0, line, format)
 
         stdscr.refresh()
-        # key = stdscr.getkey()
-        # if key == 'q':
-        #     break
-        # elif key == ''
 
         char = stdscr.getch()
-        if char == 113: break  # q
-        elif char == curses.KEY_RIGHT: slide_nr += 1
-        elif char == curses.KEY_LEFT:  slide_nr -= 1
+        if char == 113: break  # qk
+        elif char == curses.KEY_RIGHT or char == curses.KEY_DOWN:
+            slide_nr += 1
+        elif char == curses.KEY_LEFT or char == curses.KEY_UP:
+            slide_nr -= 1
         else:
             slide_nr += 1
-
-        # elif char == curses.KEY_UP:
-        # elif char == curses.KEY_DOWN:
 
         # Dont wrap around backwards
         if slide_nr < 0:
