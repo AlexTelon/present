@@ -168,5 +168,15 @@ def _load_context_without_error_check():
 HIDDEN_CONTEXT_FILE = '.presentation_slide_' + 'presentation.md'
 
 if __name__ == '__main__':
+
+    import sys
+
+    if len(sys.argv) > 1:
+
+        for arg in sys.argv[1::]:
+            if arg == '--clean' or arg == '-c':
+                # Overwrite the previous context.
+                save_context()
+
     # start the application
     wrapper(main)
