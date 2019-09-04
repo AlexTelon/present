@@ -19,7 +19,8 @@ def get_slides(file):
 
     return slides
 
-def print_slide(stdscr, slide, lines_to_print=-1)
+def print_slide(stdscr, slide, lines_to_print=-1):
+    whitespace_count = 0
     for i, line in enumerate(slide.splitlines()):
         format = curses.A_NORMAL
         if line.startswith('# '):
@@ -29,13 +30,16 @@ def print_slide(stdscr, slide, lines_to_print=-1)
 
         stdscr.addstr(i, 0, line, format)
 
-        if i == lines_to_print:
+        if line.strip() == '':
+            whitespace_count += 1
+
+        # We always are interested in printing non-whitespace stuff so dont count whitespace lines
+        if i - whitespace_count == lines_to_print:
             break
 
     # debug
     # stdscr.addstr(15, 0, "_:" + str(lines_to_print))
     stdscr.refresh()
-
 
 
 def main(stdscr):
@@ -51,7 +55,7 @@ def main(stdscr):
         slide = slides[slide_nr % len(slides)]
 
         # if we were to animate the parts of the slide line by line, how many steps would we have
-        slide_animation_length = len(slide.splitlines())
+        slide_animation_length = len([x for x in slide.splitlines() if x.strip() != ''])
 
         print_slide(stdscr, slide, animate)
 
