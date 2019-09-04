@@ -24,10 +24,14 @@ def get_slides(file):
 
     return slides
 
-# def print_center(stdscr, line):
-
-
 def print_slide(stdscr, slide, lines_to_print=-1):
+    try:
+        _print_slide_without_error_check(stdscr, slide, lines_to_print=-1)
+    except curses.error:
+        stdscr.clear()
+        _print_slide_without_error_check(stdscr, "Text does not fit!", lines_to_print=-1)
+
+def _print_slide_without_error_check(stdscr, slide, lines_to_print=-1):
     num_rows, num_cols = stdscr.getmaxyx()
 
     # want to split into 5 parts, and display our text in the middle 3 like so:
@@ -66,7 +70,6 @@ def print_slide(stdscr, slide, lines_to_print=-1):
     # debug
     # stdscr.addstr(15, 0, "_:" + str(lines_to_print))
     stdscr.refresh()
-
 
 def main(stdscr):
     stdscr.clear()
