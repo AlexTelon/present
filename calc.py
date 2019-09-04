@@ -30,6 +30,7 @@ def main(stdscr):
         for i, line in enumerate(slide.splitlines()):
             format = curses.A_NORMAL
             if line.startswith('# '):
+                line = line[2::]
                 format = curses.A_STANDOUT
                 # curses.A_BOLD is another option
             stdscr.addstr(i, 0, line, format)
