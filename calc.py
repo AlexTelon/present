@@ -9,6 +9,11 @@ def get_slides(file):
     slides = []
     slide = ''
     for line in content:
+
+        # Don't include linebreaks.
+        if line.strip() == '---':
+            continue
+
         if line.startswith('# '):
             slides.append(slide)
 
