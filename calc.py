@@ -49,7 +49,7 @@ def main(stdscr):
 
     slides = get_slides('presentation.md')
 
-    slide_nr = 1
+    slide_nr = 0
     animate = -1
     while True:
         slide = slides[slide_nr % len(slides)]
@@ -76,7 +76,7 @@ def main(stdscr):
 
             # If we go past the end of the slide go the beginning of the next one without showing contents
             if animate >= slide_animation_length:
-                animate = 1
+                animate = 0
                 slide_nr += 1
 
         elif char == curses.KEY_UP:
