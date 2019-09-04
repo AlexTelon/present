@@ -73,7 +73,7 @@ def main(stdscr):
     # Disable cursor highlight
     curses.curs_set(0)
 
-    slides = get_slides('presentation.md')
+    slides = get_slides(FILE)
 
     slide_nr, animate = load_context()
     while True:
@@ -134,7 +134,7 @@ def main(stdscr):
 
 
 def save_context(slide=0, animation=-1):
-    with open(HIDDEN_CONTEXT_FILE, 'w') as f:
+    with open(get_context_file_name(), 'w') as f:
             f.write(f'slide={slide}\n')
             f.write(f'animation={animation}\n')
 
@@ -149,7 +149,7 @@ def load_context():
 
 def _load_context_without_error_check():
     content = ''
-    with open(HIDDEN_CONTEXT_FILE, 'r') as f:
+    with open(get_context_file_name(), 'r') as f:
         content = f.readlines()
     slide = 0
     animation = -1
@@ -162,16 +162,24 @@ def _load_context_without_error_check():
 
     return (slide, animation)
 
-
 # A context that is saved per-file. This will help us get back to our previous location in the presentation.
 # That way we can get back to where we were even if we exit the application and edit something in the presentation and get back.
-HIDDEN_CONTEXT_FILE = '.presentation_slide_' + 'presentation.md'
+def get_context_file_name():
+    return '.presentation_slide_' + FILE
+
+FILE = 'presentation.md'
 
 if __name__ == '__main__':
 
     import sys
 
     if len(sys.argv) > 1:
+
+        # first loop over all args to see if we specify which file to open. Do this before checking other options.
+        for arg in sys.argv[1::]:
+            if not arg.startswith('-'):
+                # If the argument does not start with a dash then assume it is a file we want to start
+                FILE = arg
 
         for arg in sys.argv[1::]:
             if arg == '--clean' or arg == '-c':
