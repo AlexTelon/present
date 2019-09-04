@@ -26,7 +26,13 @@ def main(stdscr):
 
     slides = get_slides('presentation.md')
     for slide in slides:
-        stdscr.addstr(0, 0, slide)
+
+        for i, line in enumerate(slide.splitlines()):
+            format = curses.A_NORMAL
+            if line.startswith('# '):
+                format = curses.A_STANDOUT
+                # curses.A_BOLD is another option
+            stdscr.addstr(i, 0, line, format)
 
         stdscr.refresh()
         stdscr.getkey()
