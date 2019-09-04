@@ -75,8 +75,7 @@ def main(stdscr):
 
     slides = get_slides('presentation.md')
 
-    slide_nr = 0
-    animate = -1
+    slide_nr, animate = load_context()
     while True:
         slide = slides[slide_nr % len(slides)]
 
@@ -131,6 +130,43 @@ def main(stdscr):
     # Enable cursor highlight
     curses.curs_set(1)
 
+    save_context(slide_nr, animate)
 
 
-wrapper(main)
+def save_context(slide=0, animation=-1):
+    with open(HIDDEN_CONTEXT_FILE, 'w') as f:
+            f.write(f'slide={slide}\n')
+            f.write(f'animation={animation}\n')
+
+def load_context():
+    # The actual performing is done in the other function, here we only make sure to handle exceptions
+    try:
+        return _load_context_without_error_check()
+    except FileNotFoundError:
+        # File did not exists, write a new emtpy one.
+        save_context()
+        return load_context()
+
+def _load_context_without_error_check():
+    content = ''
+    with open(HIDDEN_CONTEXT_FILE, 'r') as f:
+        content = f.readlines()
+    slide = 0
+    animation = -1
+
+    for line in content:
+        if line.startswith('slide='):
+            slide = int(line[6::])
+        if line.startswith('animation='):
+            animation = int(line[10::])
+
+    return (slide, animation)
+
+
+# A context that is saved per-file. This will help us get back to our previous location in the presentation.
+# That way we can get back to where we were even if we exit the application and edit something in the presentation and get back.
+HIDDEN_CONTEXT_FILE = '.presentation_slide_' + 'presentation.md'
+
+if __name__ == '__main__':
+    # start the application
+    wrapper(main)
