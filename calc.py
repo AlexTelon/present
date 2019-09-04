@@ -24,7 +24,20 @@ def get_slides(file):
 
     return slides
 
+# def print_center(stdscr, line):
+
+
 def print_slide(stdscr, slide, lines_to_print=-1):
+    num_rows, num_cols = stdscr.getmaxyx()
+
+    # want to split into 5 parts, and display our text in the middle 3 like so:
+    #        heading          (always centered)
+    # ╔═══╦═══════════╦═══╗
+    # ║ 1 ║     3     ║ 1 ║   (text occupies the middle part)
+    # ╚═══╩═══════════╩═══╝
+    content_start_x = int(num_cols / 5)
+    x_position = content_start_x
+
     whitespace_count = 0
     for i, line in enumerate(slide.splitlines()):
         format = curses.A_NORMAL
@@ -33,7 +46,15 @@ def print_slide(stdscr, slide, lines_to_print=-1):
             format = curses.A_STANDOUT
             # curses.A_BOLD is another option
 
-        stdscr.addstr(i, 0, line, format)
+            # Calculate center column, and then adjust starting position based
+            # on the length of the message
+            half_length_of_message = int(len(line) / 2)
+            middle_column = int(num_cols / 2)
+            x_position = middle_column - half_length_of_message
+        else:
+            x_position = content_start_x
+
+        stdscr.addstr(i, x_position, line, format)
 
         if line.strip() == '':
             whitespace_count += 1
