@@ -1,3 +1,4 @@
+import curses
 from curses import wrapper
 
 def get_slides(file):
@@ -20,6 +21,8 @@ def get_slides(file):
 
 def main(stdscr):
     stdscr.clear()
+    # Disable cursor highlight
+    curses.curs_set(0)
 
     slides = get_slides('presentation.md')
     for slide in slides:
@@ -29,5 +32,10 @@ def main(stdscr):
         stdscr.getkey()
 
         stdscr.clear()
+
+    # Enable cursor highlight
+    curses.curs_set(1)
+
+
 
 wrapper(main)
