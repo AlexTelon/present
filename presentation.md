@@ -63,9 +63,7 @@ Not too much details you can easily learn online
 TODO:
 * Show the audience the sample project and its files
 
-
 # Demo
-
 
 # git log
 
@@ -78,9 +76,8 @@ TODO:
     git log -Gword
 
     git log | grep "stuff"
-    git log | grep -b3 "stuff"
 
-    git log example of oscar, ottomation, otto
+    git log example of oscar, otto
 
 # gitk
 
@@ -98,6 +95,10 @@ git add -A
 # git status
 
 It is your friend, use it a lot!
+
+# Demo
+
+Add a change to the project.
 
 # git rebase
 
