@@ -36,7 +36,10 @@ def main(stdscr):
             stdscr.addstr(i, 0, line, format)
 
         stdscr.refresh()
-        stdscr.getkey()
+        key = stdscr.getkey()
+
+        if key == 'q':
+            break
 
         stdscr.clear()
 
