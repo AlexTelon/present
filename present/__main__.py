@@ -25,6 +25,8 @@ def get_slides(file):
         else:
             slide += line
 
+    slides.append(slide)
+
     return slides
 
 def print_slide(stdscr, slide, lines_to_print=-1):
