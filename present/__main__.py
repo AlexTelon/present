@@ -1,4 +1,5 @@
 import curses
+import logging
 import sys
 
 from pathlib import Path    
@@ -172,11 +173,19 @@ def _load_context_without_error_check():
 def get_context_file_name():
     return '.presentation_slide_' + PRESENTATION_NAME
 
+logger = logging.getLogger(__file__)
+hdlr = logging.FileHandler(__file__ + ".log")
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr)
+logger.setLevel(logging.DEBUG)
+
 # Just the name of the current presentation file
 PRESENTATION_NAME = ''
 
 def main():
     file = 'presentation.md'
+    logger.debug('===== main ======')
     if len(sys.argv) > 1:
 
         # first loop over all args to see if we specify which file to open. Do this before checking other options.
