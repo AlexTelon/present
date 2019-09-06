@@ -1,8 +1,10 @@
 import curses
+import sys
+
+from pathlib import Path    
 from curses import wrapper
 
 def get_slides(file):
-    content = ''
     with open(file, 'r') as f:
         content = f.readlines()
 
@@ -71,12 +73,12 @@ def _print_slide_without_error_check(stdscr, slide, lines_to_print=-1):
     # stdscr.addstr(15, 0, "_:" + str(lines_to_print))
     stdscr.refresh()
 
-def main(stdscr):
+def _main(stdscr, file):
     stdscr.clear()
     # Disable cursor highlight
     curses.curs_set(0)
 
-    slides = get_slides(FILE)
+    slides = get_slides(file)
 
     slide_nr, animate = load_context()
     while True:
@@ -168,21 +170,22 @@ def _load_context_without_error_check():
 # A context that is saved per-file. This will help us get back to our previous location in the presentation.
 # That way we can get back to where we were even if we exit the application and edit something in the presentation and get back.
 def get_context_file_name():
-    return '.presentation_slide_' + FILE
+    return '.presentation_slide_' + PRESENTATION_NAME
 
-FILE = 'presentation.md'
+# Just the name of the current presentation file
+PRESENTATION_NAME = ''
 
-if __name__ == '__main__':
-
-    import sys
-
+def main():
+    file = 'presentation.md'
     if len(sys.argv) > 1:
 
         # first loop over all args to see if we specify which file to open. Do this before checking other options.
         for arg in sys.argv[1::]:
+            # import pdb; pdb.set_trace()
             if not arg.startswith('-'):
                 # If the argument does not start with a dash then assume it is a file we want to start
-                FILE = arg
+                file = arg
+                PRESENTATION_NAME = Path(file).name
 
         for arg in sys.argv[1::]:
             if arg == '--clean' or arg == '-c':
@@ -190,4 +193,9 @@ if __name__ == '__main__':
                 save_context()
 
     # start the application
-    wrapper(main)
+    wrapper(_main, file)
+
+
+
+if __name__ == '__main__':
+    main()
