@@ -7,25 +7,15 @@
  * LiU 2011-2016
  * Cybercom 2016-
 
- * Wife and 0 kids
  * Programming, games, reading
 
 # My worklife experience
 
 A lot of responsibility quickly (= fun!)
-Developing simulator and test automation for osCar
  * C#
  * Python
 
 Technical interviews
-
-# Work vs. school
-
-No instructions
-Just solve the problem
-
-Version control needed!
-
 
 # Version Control Systems
 
@@ -39,8 +29,7 @@ Version control needed!
  * Distributed version control
  * Entire code history on your local machine
  * Performant
- * Open-source
-
+ * Free and Open-source
 
 # Short history
 
@@ -100,16 +89,15 @@ It is your friend, use it a lot!
 
 Add a change to the project.
 
+# Branching in git
+
+Not something you do often when you do solo work. But its a central to how git works.
+
 # git rebase
 
 # git branch
 
 # git merge
-
-# git reflog
-To show that it is hard to delete stuff.
-
-# git blame?
 
 # Closing thoughts
 
