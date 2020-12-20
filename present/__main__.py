@@ -12,7 +12,9 @@ def get_slides(file):
 
     return content.split("\n\n")
 
-def print_slide(stdscr, slide, lines_to_print=-1):
+def print_slide(stdscr, slide, lines_to_print=-1, black=False):
+    if black:
+        return
     try:
         _print_slide_without_error_check(stdscr, slide, lines_to_print)
     except curses.error:
@@ -66,6 +68,7 @@ def _main(stdscr, file):
 
     slides = get_slides(file)
 
+    black = False
     slide_nr, animate = load_context()
     while True:
         slide = slides[slide_nr % len(slides)]
@@ -73,10 +76,17 @@ def _main(stdscr, file):
         # if we were to animate the parts of the slide line by line, how many steps would we have
         slide_animation_length = len([x for x in slide.splitlines() if x.strip() != ''])
 
-        print_slide(stdscr, slide)
+        print_slide(stdscr, slide, -1, black)
 
         char = stdscr.getch()
         if char == 113: break  # qk
+        elif chr(char) in '0123456789':
+            num = max(0, int(chr(char)) - 1)
+            slide_nr = num
+        elif chr(char) == 'b':
+            # go black.
+            black = not black
+            pass
         elif char == curses.KEY_RIGHT:
             slide_nr += 1
             # reset animation so we show the full slide
