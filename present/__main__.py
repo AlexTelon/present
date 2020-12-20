@@ -7,27 +7,10 @@ from curses import wrapper
 
 def get_slides(file):
     with open(file, 'r') as f:
-        content = f.readlines()
+        # content = [x.strip() + '\n' for x in f.readlines()]
+        content = f.read()
 
-    slides = []
-    slide = ''
-    for line in content:
-
-        # Don't include linebreaks.
-        if line.strip() == '---':
-            continue
-
-        if line.startswith('# '):
-            slides.append(slide)
-
-            # start a new slide
-            slide = line
-        else:
-            slide += line
-
-    slides.append(slide)
-
-    return slides
+    return content.split("\n\n")
 
 def print_slide(stdscr, slide, lines_to_print=-1):
     try:
