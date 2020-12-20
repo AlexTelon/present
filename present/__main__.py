@@ -71,6 +71,7 @@ def _main(stdscr, file):
     black = False
     slide_nr, animate = load_context()
     while True:
+        slides = get_slides(file)
         slide = slides[slide_nr % len(slides)]
 
         # if we were to animate the parts of the slide line by line, how many steps would we have
