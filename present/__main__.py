@@ -31,7 +31,7 @@ def _print_slide_without_error_check(stdscr, slide, lines_to_print=-1):
     x_position = content_start_x
 
     whitespace_count = 0
-    for i, line in enumerate(slide.splitlines()):
+    for i, line in enumerate(slide.splitlines(), start=3):
         format = curses.A_NORMAL
         if line.startswith('# '):
             line = line[2::]
@@ -73,7 +73,7 @@ def _main(stdscr, file):
         # if we were to animate the parts of the slide line by line, how many steps would we have
         slide_animation_length = len([x for x in slide.splitlines() if x.strip() != ''])
 
-        print_slide(stdscr, slide, animate)
+        print_slide(stdscr, slide)
 
         char = stdscr.getch()
         if char == 113: break  # qk
