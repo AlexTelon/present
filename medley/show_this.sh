@@ -8,11 +8,11 @@ fi
 
 cp $1 current.txt
 
-# replaces '_' with ' '. Filenames often use _ while ordning.txt will not
-file_name="${1//_/' '}"
+# Replaces '_' with ' '. Filenames often use _ while ordning.txt uses the song name
+song_name="${1//_/' '}"
 
-# Remove the fileending like .txt
-name=$(echo "${file_name}" | awk -F "." '{print $1}')
+# Remove the fileending like .txt (again ordning.txt uses the song name not file name)
+name=$(echo "${song_name}" | awk -F "." '{print $1}')
 
-#sed "s/${name}/${name} */i" ordning.txt > ordning.txt
+# Do the replacement inplace.
 sed -i "s/${name}/${name} */i" ordning.txt
