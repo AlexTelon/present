@@ -29,7 +29,7 @@ def _print_slide_without_error_check(stdscr, slide, lines_to_print=-1):
     # ╔═══╦═══════════╦═══╗
     # ║ 1 ║     3     ║ 1 ║   (text occupies the middle part)
     # ╚═══╩═══════════╩═══╝
-    content_start_x = int(num_cols / 5)
+    content_start_x = int(num_cols / 10)
     x_position = content_start_x
 
     whitespace_count = 0
