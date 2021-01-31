@@ -32,7 +32,6 @@ def main(current_song):
         char = msvcrt.getch()
         key = char
         if is_special_char(char):
-            print('is special!')
             char = msvcrt.getch()
             key_table = {
                 b'M': 'right',
@@ -55,6 +54,11 @@ def main(current_song):
             slide_nr = num
         elif key == 'b':
             black = not black # go black.
+            if black:
+                print('black ON')
+            else:
+                print('black OFF')
+
         elif key == 'right':
             slide_nr += 1
         elif key == 'left':
@@ -73,6 +77,8 @@ def main(current_song):
         slides = get_slides(song.content)
         slide = slides[slide_nr % len(slides)]
 
+        print(f"{slide_nr}/{len(slides)}")
+
         # Update the current slide
         if black:
             output = black_template.render()
@@ -84,7 +90,7 @@ def main(current_song):
             f.write(output)
 
 if __name__ == '__main__':
-    file = '../medley/current.txt'
+    file = '../medley/current.md'
     if len(sys.argv) > 1:
         file = sys.argv[1]
     main(file)
