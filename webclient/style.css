@@ -1,0 +1,35 @@
+body {
+    background-color: black;
+}
+
+#lyrics {
+    font-size: xxx-large;
+    white-space: pre; /* preserve whitespace, so newlines are newlines */
+}
+
+p {
+    font-size: x-large;
+    font-family: Calbri;
+    text-align: center;
+    color: white;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: large;
+    margin: 0;
+}
