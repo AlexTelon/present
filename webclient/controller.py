@@ -6,6 +6,12 @@ import msvcrt
 file_loader = FileSystemLoader('.')
 env = Environment(loader=file_loader)
 template = env.get_template('template.html')
+black_template = env.get_template('black.html')
+
+# write default empty song to output.
+output = black_template.render()
+f = open('index.html', 'w')
+f.write(output)
 
 # Get current song.
 # print(song['title'])
@@ -69,8 +75,10 @@ while True:
     slide = slides[slide_nr % len(slides)]
 
     # Update the current slide
-    print("update!")
-    song.content = slide
-    output = template.render(song=song)
+    if black:
+        output = black_template.render()
+    else:
+        song.content = slide
+        output = template.render(song=song)
     f = open('index.html', 'w')
     f.write(output)
