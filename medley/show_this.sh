@@ -6,7 +6,7 @@ if [[ ! -f "$1" ]]; then
     exit 1
 fi
 
-cp $1 current.txt
+cp $1 current.md
 
 # Replaces '_' with ' '. Filenames often use _ while ordning.txt uses the song name
 song_name="${1//_/' '}"
