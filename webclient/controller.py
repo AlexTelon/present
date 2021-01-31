@@ -10,14 +10,8 @@ black_template = env.get_template('black.html')
 
 # write default empty song to output.
 output = black_template.render()
-f = open('index.html', 'w')
-f.write(output)
-
-# Get current song.
-# print(song['title'])
-# print(song['author'])
-# print(song['ccli'])
-# print(song.content)
+with open('index.html', 'w') as f:
+    f.write(output)
 
 def get_slides(lyrics):
     return lyrics.split("\n\n")
@@ -26,18 +20,21 @@ def is_special_char(char):
     return char in [b'\000', b'\xe0']
 
 slide_nr = 0
-black = False
-slides = []
+black = True
+# Make sure to update from the latest file.
+song = frontmatter.load('current.md')
+slides = get_slides(song.content)
+slide = slides[slide_nr % len(slides)]
+
 while True:
     char = msvcrt.getch()
     key = char
     if is_special_char(char):
+        print('is special!')
         char = msvcrt.getch()
         key_table = {
             b'M': 'right',
             b'K': 'left',
-            b'H': 'up',
-            b'P': 'down',
         }
         
         if char in key_table.keys():
@@ -80,5 +77,6 @@ while True:
     else:
         song.content = slide
         output = template.render(song=song)
-    f = open('index.html', 'w')
-    f.write(output)
+
+    with open('index.html', 'w') as f:
+        f.write(output)
